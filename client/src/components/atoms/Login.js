@@ -3,36 +3,37 @@ import styled from 'styled-components';
 import {Component} from 'react';
 
 const LoginWrapper = styled.div`
-    text-align: right;
-    display: block;
-    float: right;
+    display: flex;
+    flex-direction: column;
     color: white;
-`
-
-const InsideHeadWrapper = styled.p`
-    line-height: 50px;
-    font-weight: bold;
-    margin: auto;
-    display: inline-block;
-`
-
-const Form = styled.form`
-    display: inline-block;
     margin-right: 20px;
+`
+
+const InsideHeadWrapper = styled.span`
+    display: flex;
+    font-weight: bold;
+`
+
+const LabelWrapper = styled.label`
+    margin-right: 10px;
+`
+
+const InputWrapper = styled.input`
+    margin-right: 10px;
 `
 
 class Login extends Component{
     render() {
         return (
             <LoginWrapper>
-                <InsideHeadWrapper>Login &nbsp;</InsideHeadWrapper>
-                <Form>
-                    <label>Username</label>
-                    <input type="field" />
+                <InsideHeadWrapper>Login</InsideHeadWrapper>
+                <form>
+                    <LabelWrapper>Username</LabelWrapper>
+                    <InputWrapper type="field" />
 
-                    <label>Password</label>
-                    <input type="field" />
-                </Form>
+                    <LabelWrapper>Password</LabelWrapper>
+                    <InputWrapper type="field" />
+                </form>
             </LoginWrapper>
         )
     }

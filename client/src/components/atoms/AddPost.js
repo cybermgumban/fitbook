@@ -2,15 +2,9 @@ import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
 
-const FormWrapper = styled.div`
-    text-align: center;
-    margin-top: 20px;
-`
-
 const InputWrapper = styled.input`
     height: 30px;
-    width: 60vw;
-    margin: auto;
+    width: 50vw;
 `
 
 const ButtonWrapper = styled.button`
@@ -20,12 +14,12 @@ const ButtonWrapper = styled.button`
 class AddPost extends Component {
      render() {
         return (
-            <FormWrapper>
+            <div>
                 <form>
                     <InputWrapper type="field" placeholder="What fitness task did you do today?" />
                 </form>
                 <ButtonWrapper>Submit</ButtonWrapper>
-            </FormWrapper>
+            </div>
         )
     }
 }
