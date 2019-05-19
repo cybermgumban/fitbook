@@ -3,17 +3,13 @@ import styled from 'styled-components';
 import {Component} from 'react';
 
 const LoggedInWrapper = styled.div`
-    display: block;
-    float: right;
-    color: white;
+    display: flex;
+    flex-direction: row;
 `
 
 const LabelWrapper = styled.p`
-    line-height: 50px;
-    font-weight: bold;
-    margin: auto;
-    margin-right: 20px;
-    display: inline-block;
+    margin-right: 40px;
+    color: white;
 `
 
 class LoggedIn extends Component{
