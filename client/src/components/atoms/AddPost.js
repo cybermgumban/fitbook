@@ -9,12 +9,12 @@ const FormWrapper = styled.div`
 
 const InputWrapper = styled.input`
     height: 30px;
-    width: 80vw;
+    width: 60vw;
     margin: auto;
-    margin-bottom: 5px;
 `
 
 const ButtonWrapper = styled.button`
+    margin-top: 3px;
 `
 
 class AddPost extends Component {

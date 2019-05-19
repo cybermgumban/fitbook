@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 //components
 // import Login from './Login';
-import LoggedIn from './LoggedIn';
+import LoggedIn from '../atoms/LoggedIn';
 
 const MainWrapper = styled.div`
 `
