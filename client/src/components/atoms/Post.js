@@ -13,7 +13,7 @@ class Post extends Component {
     render() {
         return (
             <PostWrapper>
-                This is a post...This is a post...This is a post...This is a post...This is a post...
+                {this.props.inside}
             </PostWrapper>
         )
     }

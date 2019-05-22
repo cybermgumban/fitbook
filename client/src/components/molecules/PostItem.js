@@ -7,27 +7,28 @@ import Name from '../atoms/Name';
 import Post from '../atoms/Post';
 import AddComment from '../atoms/AddComment';
 import Divider from '../atoms/Divider';
+import CommentItem from './CommentItem';
 
 const PostItemWrapper = styled.div`
-    margin-left: 100px;
-    margin-right: 100px;
-    border: 1px solid rgb(192,192,192);
-    padding: 10px;
 `
 
 const PostItem = () => {
     return (
         <PostItemWrapper>
             <div>
-                <PicIcon />
+                <PicIcon newht={"50px"}/>
                 <Name />
             </div>
             <div>
-                <Post />
+                <Post inside={"This is a post...This is a post...This is a post"}/>
                 <Divider />
             </div>
             <div>
                 <AddComment />
+                <Divider />
+            </div>
+            <div>
+                <CommentItem />
             </div>
         </PostItemWrapper>
     )
