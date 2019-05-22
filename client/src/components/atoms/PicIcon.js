@@ -11,7 +11,6 @@ const DivWrapper = styled.div`
 `
 
 const PicIconWrapper = styled.img`
-    height: 50px;
     width: auto;
     border: 1px solid rgb(192,192,192);
     border-radius: 50%;
@@ -21,7 +20,7 @@ class PicIcon extends Component{
     render() {
         return (
             <DivWrapper>
-                <PicIconWrapper src={imgplaceholder}/>
+                <PicIconWrapper height={this.props.newht}src={imgplaceholder}/>
             </DivWrapper>
         )
     }

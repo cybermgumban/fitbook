@@ -11,7 +11,7 @@ const LabelWrapper = styled.label`
 `
 
 const InputWrapper = styled.textarea`
-    width: 500px;
+    width: 700px;
     height: 50px;
     display: block;
 `
@@ -22,7 +22,6 @@ const AddComment = () => {
             <CommentWrapper>
                 <LabelWrapper>Comment</LabelWrapper>
                 <InputWrapper placeholder="Enter comment here..."></InputWrapper>
-                {/* <InputWrapper type="textarea"/> */}
             </CommentWrapper>
         </div>
     )
