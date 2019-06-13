@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const postcommentSchema = new Schema({
     postID: String,
-    userID: Date,
+    userID: String,
     comment: String,
-    dateComment: Date,
+    dateComment: String,
 })
 
-module.exports = mongoose.model("PostComment", authorSchema);
+module.exports = mongoose.model("PostComment", postcommentSchema);

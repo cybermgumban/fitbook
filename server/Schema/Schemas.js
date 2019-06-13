@@ -1,5 +1,4 @@
 const graphql = require('graphql');
-const _ = require('lodash');
 
 const { 
     GraphQLObjectType, 
@@ -12,35 +11,73 @@ const {
     GraphQLDate,
 } = graphql;
 
-const Book = require('../Models/Book');
-const Author = require('../Models/Author');
+const Post = require('../Models/Post');
+const PostComment = require('../Models/PostComment');
+// const PostStat = require('../Models/PostStat');
+const User = require('../Models/User');
 
-const BookType = new GraphQLObjectType ({
-    name: 'Book',
+const PostCommentType = new GraphQLObjectType ({
+    name: 'PostComment',
     fields: () => ({
         id: {type: GraphQLID},
-        name: {type: GraphQLString},
-        genre: {type:GraphQLString},
-        author: {
-            type: AuthorType,
+        comment: {type: GraphQLString},
+        dateComment: {type:GraphQLString},
+        user: {
+            type: UserType,
             resolve(parent, args) {
-                // return _.find(authors, {id: parent.authorId});
-                return Author.findById(parent.authorId);
+            return User.findById(parent.userID);
             }
         }
     })
 });
 
-const AuthorType = new GraphQLObjectType ({
-    name: 'Author',
+// const PostStatType = new GraphQLObjectType ({
+//     name: 'PostStat',
+//     fields: () => ({
+//         id: {type: GraphQLID},
+//         likeCount: {type: GraphQLInt},
+//     })
+// });
+
+const PostType = new GraphQLObjectType ({
+    name: 'Post',
     fields: () => ({
         id: {type: GraphQLID},
-        name: {type: GraphQLString},
-        age: {type:GraphQLInt},
-        books: {
-            type: new GraphQLList(BookType),
+        datePublished: {type: GraphQLString},
+        content: {type:GraphQLString},
+        user: {
+            type: UserType,
             resolve(parent, args) {
-            return Book.find({authorId: parent.id});
+            return User.findById(parent.userID);
+            }
+        },
+        postcomments: {
+            type: new GraphQLList(PostCommentType),
+            resolve(parent, args) {
+            return PostComment.find({postID: parent.id});
+            }    
+        }
+    })
+});
+
+const UserType = new GraphQLObjectType ({
+    name: 'User',
+    fields: () => ({
+        id: {type: GraphQLID},
+        userName: {type: GraphQLID},
+        email: {type: GraphQLString},
+        password: {type:GraphQLString},
+        dateRegistered: {type: GraphQLString},
+        firstName: {type: GraphQLString},
+        lastName: {type:GraphQLString},
+        gender: {type:GraphQLString},
+        dateOfBirth: {type:GraphQLString},
+        occupation: {type:GraphQLString},
+        about: {type:GraphQLString},
+        posts: {
+            type: new GraphQLList(PostType),
+            resolve(parent, args) {
+            return Post.find({userID: parent.id});
             }
         }
     })
@@ -49,30 +86,23 @@ const AuthorType = new GraphQLObjectType ({
 const RootQuery = new GraphQLObjectType ({
     name: 'RootQueryType',
     fields: {
-        book: {
-            type: BookType,
+        user: {
+            type: UserType,
             args: {id: {type: GraphQLID}},
             resolve(parent, args) {
-            return Book.findById(args.id);
+            return User.findById(args.id);
             }
         },
-        author: {
-            type: AuthorType,
-            args: {id: {type: GraphQLID}},
+        posts: {
+            type: new GraphQLList(PostType),
             resolve(parent, args) {
-            return Author.findById(args.id);
+            return Post.find();
             }
         },
-        books: {
-            type: new GraphQLList(BookType),
+        users: {
+            type: new GraphQLList(UserType),
             resolve(parent, args) {
-            return Book.find();
-            }
-        },
-        authors: {
-            type: new GraphQLList(AuthorType),
-            resolve(parent, args) {
-            return Author.find();
+            return User.find();
             }
         },
     }
@@ -81,38 +111,72 @@ const RootQuery = new GraphQLObjectType ({
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-        addAuthor: {
-            type: AuthorType,
+        addUser: {
+            type: UserType,
             args: {
-                name: {type: new GraphQLNonNull(GraphQLString)},
-                age: {type: new GraphQLNonNull(GraphQLInt)},
+                userName: {type: new GraphQLNonNull(GraphQLString)},
+                email: {type: new GraphQLNonNull(GraphQLString)},
+                password: {type: new GraphQLNonNull(GraphQLString)},
+                dateRegistered: {type: new GraphQLNonNull(GraphQLString)},
+                firstName: {type: new GraphQLNonNull(GraphQLString)},
+                lastName: {type: new GraphQLNonNull(GraphQLString)},
+                gender: {type: new GraphQLNonNull(GraphQLString)},
+                dateOfBirth: {type: new GraphQLNonNull(GraphQLString)},
+                occupation: {type: new GraphQLNonNull(GraphQLString)},
+                about: {type: new GraphQLNonNull(GraphQLString)},
             },
             resolve(parent, args) {
-                let author = new Author({
-                    name: args.name,
-                    age: args.age,
+                let user = new User({
+                    userName: args.userName,
+                    email: args.email,
+                    password: args.password,
+                    dateRegistered: args.dateRegistered,
+                    firstName: args.firstName,
+                    lastName: args.lastName,
+                    gender: args.gender,
+                    dateOfBirth: args.dateOfBirth,
+                    occupation: args.occupation,
+                    about: args.about,
                 });
-                return author.save();
+                return user.save();
             }
         },
-        addBook: {
-            type: BookType,
+        addPost: {
+            type: PostType,
             args: {
-                name: {type: new GraphQLNonNull(GraphQLString)},
-                genre: {type: new GraphQLNonNull(GraphQLString)},
-                authorId: {type: new GraphQLNonNull(GraphQLID)},
+                userID: {type: new GraphQLNonNull(GraphQLID)},
+                datePublished: {type: new GraphQLNonNull(GraphQLString)},
+                content: {type: new GraphQLNonNull(GraphQLString)},
             },
             resolve(parent, args) {
-                let book = new Book({
-                    name: args.name,
-                    genre: args.genre,
-                    authorId: args.authorId,
+                let post = new Post({
+                    userID: args.userID,
+                    datePublished: args.datePublished,
+                    content: args.content,
                 });
-                return book.save();
+                return post.save();
+            }
+        },
+        addComment: {
+            type: PostCommentType,
+            args: {
+                postID: {type: new GraphQLNonNull(GraphQLID)},
+                userID: {type: new GraphQLNonNull(GraphQLID)},
+                dateComment: {type: new GraphQLNonNull(GraphQLString)},
+                comment: {type: new GraphQLNonNull(GraphQLString)},
+            },
+            resolve(parent, args) {
+                let postcomment = new PostComment({
+                    postID: args.postID,
+                    userID: args.userID,
+                    dateComment: args.dateComment,
+                    comment: args.comment,
+                });
+                return postcomment.save();
             }
         },
     }
-})
+});
 
 module.exports = new GraphQLSchema({
     query: RootQuery,

@@ -6,4 +6,4 @@ const poststatSchema = new Schema({
     likeCount: Number,
 })
 
-module.exports = mongoose.model("PostStat", authorSchema);
+module.exports = mongoose.model("PostStat", poststatSchema);

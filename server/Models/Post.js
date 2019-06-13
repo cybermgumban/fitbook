@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
     userID: String,
-    datePublished: Date,
+    datePublished: String,
     content: String,
 })
 
-module.exports = mongoose.model("Post", authorSchema);
+module.exports = mongoose.model("Post", postSchema);
