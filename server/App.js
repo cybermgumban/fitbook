@@ -11,7 +11,7 @@ const { Client } = require('pg');
 app.use(cors());
 
 //connect to mLab database
-mongoose.connect('mongodb+srv://marlon:test123@cluster0-a53tv.mongodb.net/test?retryWrites=true')
+mongoose.connect('mongodb+srv://marlon:12345@cluster0-xtcjj.mongodb.net/test?retryWrites=true&w=majority')
 mongoose.connection.once('open', () => {
     console.log('connected to database');
 })
