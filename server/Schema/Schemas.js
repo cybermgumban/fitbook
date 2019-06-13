@@ -13,7 +13,7 @@ const {
 
 const Post = require('../Models/Post');
 const PostComment = require('../Models/PostComment');
-// const PostStat = require('../Models/PostStat');
+const PostStat = require('../Models/PostStat');
 const User = require('../Models/User');
 
 const PostCommentType = new GraphQLObjectType ({
@@ -33,14 +33,14 @@ const PostCommentType = new GraphQLObjectType ({
     })
 });
 
-// const PostStatType = new GraphQLObjectType ({
-//     name: 'PostStat',
-//     fields: () => ({
-//         id: {type: GraphQLID},
-//         postID: {type: GraphQLID},
-//         likeCount: {type: GraphQLInt},
-//     })
-// });
+const PostStatType = new GraphQLObjectType ({
+    name: 'PostStat',
+    fields: () => ({
+        id: {type: GraphQLID},
+        postID: {type: GraphQLID},
+        likeCount: {type: GraphQLInt},
+    })
+});
 
 const PostType = new GraphQLObjectType ({
     name: 'Post',
@@ -177,6 +177,20 @@ const Mutation = new GraphQLObjectType({
                     comment: args.comment,
                 });
                 return postcomment.save();
+            }
+        },
+        addPostStat: {
+            type: PostStatType,
+            args: {
+                postID: {type: new GraphQLNonNull(GraphQLID)},
+                likeCount: {type: new GraphQLNonNull(GraphQLInt)},
+            },
+            resolve(parent, args) {
+                let poststat = new PostStat({
+                    postID: args.postID,
+                    likeCount: args.likeCount,
+                });
+                return poststat.save();
             }
         },
     }
