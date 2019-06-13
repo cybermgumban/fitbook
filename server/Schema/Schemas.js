@@ -20,6 +20,8 @@ const PostCommentType = new GraphQLObjectType ({
     name: 'PostComment',
     fields: () => ({
         id: {type: GraphQLID},
+        postID: {type: GraphQLID},
+        userID: {type: GraphQLID},
         comment: {type: GraphQLString},
         dateComment: {type:GraphQLString},
         user: {
@@ -35,6 +37,7 @@ const PostCommentType = new GraphQLObjectType ({
 //     name: 'PostStat',
 //     fields: () => ({
 //         id: {type: GraphQLID},
+//         postID: {type: GraphQLID},
 //         likeCount: {type: GraphQLInt},
 //     })
 // });
@@ -43,6 +46,7 @@ const PostType = new GraphQLObjectType ({
     name: 'Post',
     fields: () => ({
         id: {type: GraphQLID},
+        userID: {type: GraphQLID},
         datePublished: {type: GraphQLString},
         content: {type:GraphQLString},
         user: {
