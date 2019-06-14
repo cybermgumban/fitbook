@@ -18,7 +18,6 @@ const PostItemWrapper = styled.div`
 
 class PostItem extends Component {
     displayPosts() {
-        // console.log("!@data", this.props.data)
         const data = this.props.data;
         
         if(data.loading) {

@@ -11,7 +11,6 @@ const PostWrapper = styled.span`
 
 class PostCommentItem extends Component {
     render() {
-        console.log("!@comment", this.props)
         return (
             <PostWrapper>
                 {this.props.postcomment.comment}

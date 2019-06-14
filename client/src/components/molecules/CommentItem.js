@@ -21,9 +21,8 @@ class PostItem extends Component {
         return (
             comments.map ((comment, index) =>   
                 <CommentItemWrapper key={index}>
-                    {/* {console.log("!@comment", comment)} */}
                     <div>
-                        <PicIcon newht={"35px"}/>
+                        <PicIcon newht={"25px"}/>
                         <NameCommentItem user={comment.user}/>
                     </div>
                     <div>
