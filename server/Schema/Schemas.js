@@ -8,7 +8,6 @@ const {
     GraphQLInt,
     GraphQLList,
     GraphQLNonNull, 
-    GraphQLDate,
 } = graphql;
 
 const Post = require('../Models/Post');
@@ -59,8 +58,14 @@ const PostType = new GraphQLObjectType ({
             type: new GraphQLList(PostCommentType),
             resolve(parent, args) {
             return PostComment.find({postID: parent.id});
-            }    
-        }
+            }
+        },
+        poststat: {
+            type: PostStatType,
+            resolve(parent, args) {
+            return PostStat.findById(parent.postID);
+            }
+        },
     })
 });
 
@@ -90,6 +95,12 @@ const UserType = new GraphQLObjectType ({
 const RootQuery = new GraphQLObjectType ({
     name: 'RootQueryType',
     fields: {
+        users: {
+            type: new GraphQLList(UserType),
+            resolve(parent, args) {
+            return User.find();
+            }
+        },
         user: {
             type: UserType,
             args: {id: {type: GraphQLID}},
@@ -103,10 +114,17 @@ const RootQuery = new GraphQLObjectType ({
             return Post.find();
             }
         },
-        users: {
-            type: new GraphQLList(UserType),
+        postcomments: {
+            type: new GraphQLList(PostCommentType),
             resolve(parent, args) {
-            return User.find();
+            return PostComment.find();
+            }
+        },
+        poststat: {
+            type: PostStatType,
+            args: {id: {type: GraphQLID}},
+            resolve(parent, args) {
+            return PostStat.findById(args.id);
             }
         },
     }
