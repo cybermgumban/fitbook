@@ -27,6 +27,13 @@ const getPostsQuery = gql`
                 firstName
                 lastName
             }
+            postcomments{
+                comment
+                user{
+                    firstName
+                    lastName
+                }
+            }
         }
     }
 `

@@ -9,16 +9,15 @@ const PostWrapper = styled.span`
     margin-bottom: 5px;
 `
 
-class Post extends Component {
+class PostCommentItem extends Component {
     render() {
-        // console.log("!@this.props", this.props)
-
+        console.log("!@comment", this.props)
         return (
             <PostWrapper>
-                {/* {this.props.inside.comment.comment} */}
+                {this.props.postcomment.comment}
             </PostWrapper>
         )
     }
 }
 
-export default Post;
+export default PostCommentItem;

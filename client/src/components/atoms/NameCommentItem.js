@@ -8,20 +8,20 @@ const NameWrapper = styled.div`
     display: inline-block;
 `
 
-const Name = (props) => {
+const NameCommentItem = (props) => {
         return (
             <NameWrapper>
                 <span>
-                    {props.names.firstName}
+                    {props.user.firstName}
                 </span>
                 <span>
                     &nbsp;
                 </span>
                 <span>
-                    {props.names.lastName}
+                    {props.user.lastName}
                 </span>
             </NameWrapper>
         )
 }
 
-export default Name;
+export default NameCommentItem;

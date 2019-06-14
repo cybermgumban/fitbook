@@ -18,7 +18,7 @@ const PostItemWrapper = styled.div`
 
 class PostItem extends Component {
     displayPosts() {
-    
+        // console.log("!@data", this.props.data)
         const data = this.props.data;
         
         if(data.loading) {
@@ -27,7 +27,6 @@ class PostItem extends Component {
             )
         } else {
             return data.posts.map((post,index) => {
-                console.log("!@postNames", post.user)
                 return (
                         <PostItemWrapper key={index}>
                             <div>
@@ -43,7 +42,7 @@ class PostItem extends Component {
                                 <Divider />
                             </div>
                             <div>
-                                <CommentItem />
+                                <CommentItem comments={post.postcomments}/>
                             </div>
                             <div>
                                 <Divider />

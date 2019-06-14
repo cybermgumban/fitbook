@@ -1,29 +1,47 @@
 import React from 'react';
+import {Component} from 'react';
 import styled from 'styled-components';
 
 //components
 import PicIcon from '../atoms/PicIcon';
-import Name from '../atoms/Name';
-import Post from '../atoms/Post';
+import NameCommentItem from '../atoms/NameCommentItem';
+import PostCommentItem from '../atoms/PostCommentItem';
 import Divider from '../atoms/Divider';
 
 const CommentItemWrapper = styled.div`
     padding: 10px;
 `
 
-const PostItem = () => {
-    return (
-        <CommentItemWrapper>
+class PostItem extends Component {
+
+    displayComments(){
+        
+        const comments = this.props.comments;
+
+        return (
+            comments.map ((comment, index) =>   
+                <CommentItemWrapper key={index}>
+                    {/* {console.log("!@comment", comment)} */}
+                    <div>
+                        <PicIcon newht={"35px"}/>
+                        <NameCommentItem user={comment.user}/>
+                    </div>
+                    <div>
+                        <PostCommentItem postcomment={comment}/>
+                        <Divider />
+                    </div>
+                </CommentItemWrapper>
+            )
+        )
+    }
+
+    render() {
+        return (
             <div>
-                <PicIcon newht={"35px"}/>
-                <Name />
+                {this.displayComments()}
             </div>
-            <div>
-                <Post inside={"This is a comment...This is a comment...This is a comment"}/>
-                <Divider />
-            </div>
-        </CommentItemWrapper>
-    )
+        )
+    }
 }
 
 export default PostItem;
