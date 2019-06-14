@@ -1,5 +1,8 @@
 import React from 'react';
+import {Component} from 'react';
 import styled from 'styled-components';
+import {graphql} from 'react-apollo';
+import { getPostsQuery } from '../../queries/queries';
 
 //components
 import PicIcon from '../atoms/PicIcon';
@@ -10,28 +13,54 @@ import Divider from '../atoms/Divider';
 import CommentItem from './CommentItem';
 
 const PostItemWrapper = styled.div`
+    margin: 50px 0px;
 `
 
-const PostItem = () => {
-    return (
-        <PostItemWrapper>
+class PostItem extends Component {
+    displayPosts() {
+    
+        const data = this.props.data;
+        
+        if(data.loading) {
+            return (
+                <div>Loading Posts...</div>
+            )
+        } else {
+            return data.posts.map((post,index) => {
+                console.log("!@postNames", post.user)
+                return (
+                        <PostItemWrapper key={index}>
+                            <div>
+                                <PicIcon newht={"50px"}/>
+                                <Name names={post.user}/>
+                            </div>
+                            <div>
+                                <Post inside={post.content}/>
+                                <Divider />
+                            </div>
+                            <div>
+                                <AddComment />
+                                <Divider />
+                            </div>
+                            <div>
+                                <CommentItem />
+                            </div>
+                            <div>
+                                <Divider />
+                            </div>
+                        </PostItemWrapper>
+                )
+            })
+        }
+    }
+
+    render() {
+        return (
             <div>
-                <PicIcon newht={"50px"}/>
-                <Name />
+                {this.displayPosts()}
             </div>
-            <div>
-                <Post inside={"This is a post...This is a post...This is a post"}/>
-                <Divider />
-            </div>
-            <div>
-                <AddComment />
-                <Divider />
-            </div>
-            <div>
-                <CommentItem />
-            </div>
-        </PostItemWrapper>
-    )
+        )
+    }
 }
 
-export default PostItem;
+export default graphql(getPostsQuery)(PostItem);

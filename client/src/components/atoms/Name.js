@@ -8,20 +8,28 @@ const NameWrapper = styled.div`
     display: inline-block;
 `
 
-const Name = () => {
-    return (
-        <NameWrapper>
-            <span>
-                FirstName
-            </span>
-            <span>
-                &nbsp;
-            </span>
-            <span>
-                LastName
-            </span>
-        </NameWrapper>
-    )
+const Name = (names) => {
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         names: null
+    //     }
+    // }
+
+    console.log("!@propsInName", names)
+        return (
+            <NameWrapper>
+                <span>
+                    {/* {props.names} */}
+                </span>
+                <span>
+                    &nbsp;
+                </span>
+                <span>
+                    {/* {props.lastName} */}
+                </span>
+            </NameWrapper>
+        )
 }
 
 export default Name;

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
+import ApolloClient from 'apollo-boost';
+import {ApolloProvider} from 'react-apollo';
 
 //components
 import Header from '../atoms/Header';
@@ -9,6 +11,11 @@ import LoggedIn from '../atoms/LoggedIn';
 import AddPost from '../atoms/AddPost';
 import Divider from '../atoms/Divider';
 import PostItem from  '../molecules/PostItem';
+
+//apollo client setup
+const client = new ApolloClient({
+    uri: 'http://localhost:4000/graphql'
+  })
 
 const HomepageWrapper = styled.div`
     display: grid;
@@ -53,13 +60,25 @@ const PostItemWrapper = styled.div`
 class Homepage extends Component {
     render() {
         return (
-            <HomepageWrapper>
-                <HeadWrapper><Header /></HeadWrapper>
-                <Head2Wrapper><LoggedIn /></Head2Wrapper>
-                <AddPostWrapper><AddPost /></AddPostWrapper>
-                <DividerWrapper><Divider /></DividerWrapper>
-                <PostItemWrapper><PostItem /></PostItemWrapper>
-            </HomepageWrapper>
+            <ApolloProvider client={client}>
+                <HomepageWrapper>
+                    <HeadWrapper>
+                        <Header />
+                    </HeadWrapper>
+                    <Head2Wrapper>
+                        <LoggedIn />
+                    </Head2Wrapper>
+                    <AddPostWrapper>
+                        <AddPost />
+                    </AddPostWrapper>
+                    <DividerWrapper>
+                        <Divider />
+                    </DividerWrapper>
+                    <PostItemWrapper >
+                        <PostItem/>
+                    </PostItemWrapper>
+                </HomepageWrapper>
+            </ApolloProvider>
         )
     }
 }
