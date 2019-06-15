@@ -14,7 +14,7 @@ class Post extends Component {
         return (
             <div>
                 <PostWrapper>
-                    {this.props.inside}
+                    {this.props.inside? this.props.inside : this.props.postcomment.comment }
                 </PostWrapper>
             </div>
         )

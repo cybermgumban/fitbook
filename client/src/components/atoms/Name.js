@@ -12,13 +12,13 @@ const Name = (props) => {
         return (
             <NameWrapper>
                 <span>
-                    {props.names.firstName}
+                    {props.names? props.names.firstName : props.user.firstName}
                 </span>
                 <span>
                     &nbsp;
                 </span>
                 <span>
-                    {props.names.lastName}
+                    {props.names? props.names.lastName : props.user.lastName}
                 </span>
             </NameWrapper>
         )

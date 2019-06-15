@@ -48,7 +48,6 @@ class AddComment extends Component{
     }
 
     render() {
-        console.log("!@props", this.props.post.user.id)
         return (
             <div>
                 <CommentWrapper onSubmit={(e) => e.preventDefault()}>

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 //components
 import PicIcon from '../atoms/PicIcon';
-import NameCommentItem from '../atoms/NameCommentItem';
-import PostCommentItem from '../atoms/PostCommentItem';
+import Name from '../atoms/Name';
+import Post from '../atoms/Post';
 import Divider from '../atoms/Divider';
 
 const CommentItemWrapper = styled.div`
@@ -23,10 +23,10 @@ class PostItem extends Component {
                 <CommentItemWrapper key={index}>
                     <div>
                         <PicIcon newht={"25px"}/>
-                        <NameCommentItem user={comment.user}/>
+                        <Name user={comment.user}/>
                     </div>
                     <div>
-                        <PostCommentItem postcomment={comment}/>
+                        <Post postcomment={comment}/>
                         <Divider />
                     </div>
                 </CommentItemWrapper>
