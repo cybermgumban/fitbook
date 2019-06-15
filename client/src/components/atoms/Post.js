@@ -11,11 +11,12 @@ const PostWrapper = styled.span`
 
 class Post extends Component {
     render() {
-
         return (
-            <PostWrapper>
-                {/* {this.props.inside.comment.comment} */}
-            </PostWrapper>
+            <div>
+                <PostWrapper>
+                    {this.props.inside}
+                </PostWrapper>
+            </div>
         )
     }
 }

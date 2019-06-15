@@ -40,7 +40,7 @@ const getPostsQuery = gql`
 
 const addUserMutation = gql`
     mutation($userName: String!, $email: String!, $password: String!, $dateRegistered: String!, $firstName: String!, $lastName: String!, $gender: String!, $dateOfBirth: String!, $occupation: String!, $about: String!) {
-        addBook(userName: $userName, email: $email, password: $password, dateRegistered: $dateRegistered, firstName: $firstName, lastName: $lastName, gender: $gender, dateOfBirth: $dateOfBirth, occupation: $occupation, about: $about){
+        addUser(userName: $userName, email: $email, password: $password, dateRegistered: $dateRegistered, firstName: $firstName, lastName: $lastName, gender: $gender, dateOfBirth: $dateOfBirth, occupation: $occupation, about: $about){
             userName
             email
             password
@@ -57,7 +57,7 @@ const addUserMutation = gql`
 
 const addPostMutation = gql`
     mutation($userID: ID!, $datePublished: String!, $content: String!) {
-        addBook(userID: $userID, datePublished: $datePublished, content: $content){
+        addPost(userID: $userID, datePublished: $datePublished, content: $content){
             userID
             datePublished
             content
@@ -67,7 +67,7 @@ const addPostMutation = gql`
 
 const addPostCommentMutation = gql`
     mutation($postID: ID!, $userID: ID!, $comment: String!, $dateComment: String!) {
-        addBook(postID: $postID, userID: $userID, comment: $comment, dateComment: $dateComment){
+        addPostComment(postID: $postID, userID: $userID, comment: $comment, dateComment: $dateComment){
             postID
             userID
             comment
@@ -78,7 +78,7 @@ const addPostCommentMutation = gql`
 
 const addPostStatMutation = gql`
     mutation($postID: String!, $likeCount: Number!) {
-        addBook(postID: $postID, likeCount: $likeCount){
+        addPostStat(postID: $postID, likeCount: $likeCount){
             postID
             likeCount
         }
