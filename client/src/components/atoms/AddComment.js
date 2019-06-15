@@ -14,6 +14,7 @@ const InputWrapper = styled.textarea`
     width: 700px;
     height: 50px;
     display: block;
+    resize: vertical;
 `
 
 const AddComment = () => {

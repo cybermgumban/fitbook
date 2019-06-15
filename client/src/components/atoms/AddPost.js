@@ -40,7 +40,7 @@ class AddPost extends Component {
         return (
             <div>
                 <form onSubmit={(e) => this.submitForm(e)}>
-                    <InputWrapper type="textarea" 
+                    <InputWrapper 
                     onChange={(e) => this.setState ({newpost: e.target.value})}
                     placeholder="What fitness task did you do today?" />
                 </form>
