@@ -20,16 +20,20 @@ const getUsersQuery = gql`
 const getPostsQuery = gql`
     {
         posts {
+            id
             userID
             datePublished
             content
             user{
+                id
                 firstName
                 lastName
             }
             postcomments{
+                id
                 comment
                 user{
+                    id
                     firstName
                     lastName
                 }
@@ -99,16 +103,19 @@ const getPostQuery = gql`
             occupation
             about
             posts {
+                id
                 userID
                 datePublished
                 content
                 postcomments {
+                    id
                     postID
                     userID
                     comment
                     dateComment
                 }
                 poststat {
+                    id
                     postID
                     likeCount
                 }

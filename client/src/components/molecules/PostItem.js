@@ -13,7 +13,7 @@ import Divider from '../atoms/Divider';
 import CommentItem from './CommentItem';
 
 const PostItemWrapper = styled.div`
-    margin: 70px 0px;
+    margin-bottom: 60px;
 `
 
 class PostItem extends Component {
@@ -37,7 +37,7 @@ class PostItem extends Component {
                                 <Divider />
                             </div>
                             <div>
-                                <AddComment />
+                                <AddComment post={post}/>
                                 <Divider />
                             </div>
                             <div>
