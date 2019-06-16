@@ -28,7 +28,7 @@ class Login extends Component{
             <LoginWrapper>
                 <InsideHeadWrapper>Login</InsideHeadWrapper>
                 <form>
-                    <LabelWrapper>Username</LabelWrapper>
+                    <LabelWrapper>Email</LabelWrapper>
                     <InputWrapper type="field" />
 
                     <LabelWrapper>Password</LabelWrapper>

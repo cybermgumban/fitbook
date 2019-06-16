@@ -3,7 +3,6 @@ import {gql} from 'apollo-boost';
 const getUsersQuery = gql`
     {
         users {
-            userName
             email
             password
             dateRegistered
@@ -43,9 +42,8 @@ const getPostsQuery = gql`
 `
 
 const addUserMutation = gql`
-    mutation($userName: String!, $email: String!, $password: String!, $dateRegistered: String!, $firstName: String!, $lastName: String!, $gender: String!, $dateOfBirth: String!, $occupation: String!, $about: String!) {
-        addUser(userName: $userName, email: $email, password: $password, dateRegistered: $dateRegistered, firstName: $firstName, lastName: $lastName, gender: $gender, dateOfBirth: $dateOfBirth, occupation: $occupation, about: $about){
-            userName
+    mutation($email: String!, $password: String!, $dateRegistered: String!, $firstName: String!, $lastName: String!, $gender: String!, $dateOfBirth: String!, $occupation: String!, $about: String!) {
+        addUser(email: $email, password: $password, dateRegistered: $dateRegistered, firstName: $firstName, lastName: $lastName, gender: $gender, dateOfBirth: $dateOfBirth, occupation: $occupation, about: $about){
             email
             password
             dateRegistered
@@ -92,7 +90,6 @@ const addPostStatMutation = gql`
 const getPostQuery = gql`
     query($id: ID){
         user(id: $id){
-            userName
             email
             password
             dateRegistered
