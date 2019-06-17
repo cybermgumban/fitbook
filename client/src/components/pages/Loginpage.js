@@ -50,7 +50,6 @@ class Login extends Component{
         e.preventDefault();
         this.setState({
             login: !this.state.login,
-
         })
     }
 
@@ -73,10 +72,13 @@ class Login extends Component{
                         firstName: this.state.firstName.trim(),
                         lastName: this.state.lastName.trim(),
                     }
-            })
+                })
                 this.setState ({
                     login: true,
+                    email: "",
+                    password: "",
                 })
+                window.location.reload()
             }
         } 
         

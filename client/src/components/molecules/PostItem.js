@@ -25,30 +25,30 @@ class PostItem extends Component {
                 <div>Loading Posts...</div>
             )
         } else {
-            return data.user.posts.map((post,index) => {
-                return (
-                        <PostItemWrapper key={index}>
-                            <div>
-                                <PicIcon newht={"50px"}/>
-                                <Name names={post.user}/>
-                            </div>
-                            <div>
-                                <Post inside={post.content}/>
-                                <Divider />
-                            </div>
-                            <div>
-                                <AddComment post={post}/>
-                                <Divider />
-                            </div>
-                            <div>
-                                <CommentItem comments={post.postcomments}/>
-                            </div>
-                            <div>
-                                <Divider />
-                            </div>
-                        </PostItemWrapper>
-                )
-            })
+                return data.user.posts.map((post,index) => {
+                    return (
+                            <PostItemWrapper key={index}>
+                                <div>
+                                    <PicIcon newht={"50px"}/>
+                                    <Name names={post.user}/>
+                                </div>
+                                <div>
+                                    <Post inside={post.content}/>
+                                    <Divider />
+                                </div>
+                                <div>
+                                    <AddComment post={post}/>
+                                    <Divider />
+                                </div>
+                                <div>
+                                    <CommentItem comments={post.postcomments}/>
+                                </div>
+                                <div>
+                                    <Divider />
+                                </div>
+                            </PostItemWrapper>
+                    )
+                })
         }
     }
 
