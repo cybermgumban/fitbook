@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const { Client } = require('pg');
 
 //allow coss-origin requests
 app.use(cors());
@@ -14,7 +13,7 @@ app.use(cors());
 mongoose.connect('mongodb+srv://marlon:12345@cluster0-xtcjj.mongodb.net/test?retryWrites=true&w=majority')
 mongoose.connection.once('open', () => {
     console.log('connected to database');
-})
+});
 
 
 // connect to graphQL server
