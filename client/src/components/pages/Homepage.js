@@ -7,10 +7,10 @@ import {ApolloProvider} from 'react-apollo';
 //components
 import Header from '../atoms/Header';
 import LoggedIn from '../atoms/LoggedIn';
-// import Login from '../atoms/Login'
 import AddPost from '../atoms/AddPost';
 import Divider from '../atoms/Divider';
 import PostItem from  '../molecules/PostItem';
+import Loginpage from '../pages/Loginpage'
 
 //apollo client setup
 const client = new ApolloClient({
@@ -56,28 +56,37 @@ const PostItemWrapper = styled.div`
     grid-area: Post;
     justify-self: center;
 `
-
 class Homepage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            inside: false,
+        }
+    }
+
     render() {
         return (
             <ApolloProvider client={client}>
-                <HomepageWrapper>
-                    <HeadWrapper>
-                        <Header />
-                    </HeadWrapper>
-                    <Head2Wrapper>
-                        <LoggedIn />
-                    </Head2Wrapper>
-                    <AddPostWrapper>
-                        <AddPost />
-                    </AddPostWrapper>
-                    <DividerWrapper>
-                        <Divider />
-                    </DividerWrapper>
-                    <PostItemWrapper >
-                        <PostItem/>
-                    </PostItemWrapper>
-                </HomepageWrapper>
+                    {this.state.inside?        
+                        (<HomepageWrapper>
+                            <HeadWrapper>
+                                <Header />
+                            </HeadWrapper>
+                            <Head2Wrapper>
+                                <LoggedIn />
+                            </Head2Wrapper>
+                            <AddPostWrapper>
+                                <AddPost />
+                            </AddPostWrapper>
+                            <DividerWrapper>
+                                <Divider />
+                            </DividerWrapper>
+                            <PostItemWrapper >
+                                <PostItem/>
+                            </PostItemWrapper>
+                        </HomepageWrapper>) :
+                        <Loginpage />
+                    }
             </ApolloProvider>
         )
     }
