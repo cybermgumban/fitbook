@@ -5,6 +5,7 @@ const getUsersQuery = gql`
         users {
             id
             email
+            password
         }
     }
 `
@@ -89,11 +90,6 @@ const addPostStatMutation = gql`
 const getPostQuery = gql`
     query($id: ID){
         user(id: $id){
-            email
-            password
-            dateRegistered
-            firstName
-            lastName
             posts {
                 id
                 userID
@@ -105,11 +101,20 @@ const getPostQuery = gql`
                     userID
                     comment
                     dateComment
+                    user {
+                        firstName
+                        lastName
+                    }
                 }
                 poststat {
                     id
                     postID
                     likeCount
+                }
+                user {
+                    firstName
+                    lastName
+                    dateRegistered
                 }
             }
         }

@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
 import {graphql, compose} from 'react-apollo';
-import { getPostsQuery, addPostCommentMutation } from '../../queries/queries';
+import { getPostQuery, addPostCommentMutation } from '../../queries/queries';
 
 const CommentWrapper = styled.form`
     margin-top: 10px;
@@ -34,12 +34,15 @@ class AddComment extends Component{
         this.props.addPostCommentMutation({
             variables: {
                 postID: this.props.post.id,
-                userID: this.props.post.user.id,
+                userID: this.props.post.userID,
                 dateComment: today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear(),
                 comment: this.state.newcomment
             },
             refetchQueries: [{
-                query: getPostsQuery
+                query: getPostQuery,
+                variables: {
+                    id: this.props.post.userID,
+                }
             }]
         })
         this.setState ({

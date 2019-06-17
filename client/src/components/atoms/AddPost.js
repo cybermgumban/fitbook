@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
 import {graphql, compose} from 'react-apollo';
-import { getPostsQuery, addPostMutation } from '../../queries/queries';
+import { getPostQuery, addPostMutation } from '../../queries/queries';
 
 const InputWrapper = styled.input`
     height: 30px;
@@ -17,7 +17,7 @@ class AddPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        newpost: '',
+            newpost: '',
         }
     }
 
@@ -26,12 +26,15 @@ class AddPost extends Component {
         e.preventDefault(); 
         this.props.addPostMutation({
             variables: {
-                userID: "5d0260709f41ac159cc20e07",
+                userID: this.props.userID,
                 datePublished: today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear(),
                 content: this.state.newpost
             },
             refetchQueries: [{
-                query: getPostsQuery
+                query: getPostQuery,
+                variables: {
+                    id: this.props.userID
+                }
             }]
         })
         this.setState ({
@@ -41,7 +44,6 @@ class AddPost extends Component {
     }
 
      render() {
-
         return (
             <div>
                 <form onSubmit={(e) => this.submitForm(e)}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
 import {graphql} from 'react-apollo';
-import { getPostsQuery } from '../../queries/queries';
+import { getPostQuery } from '../../queries/queries';
 
 //components
 import PicIcon from '../atoms/PicIcon';
@@ -25,7 +25,8 @@ class PostItem extends Component {
                 <div>Loading Posts...</div>
             )
         } else {
-            return data.posts.map((post,index) => {
+            console.log("!@posts", data.user)
+            return data.user.posts.map((post,index) => {
                 return (
                         <PostItemWrapper key={index}>
                             <div>
@@ -61,4 +62,12 @@ class PostItem extends Component {
     }
 }
 
-export default graphql(getPostsQuery)(PostItem);
+export default graphql(getPostQuery, {
+    options: (props) => {
+        return {
+            variables: {
+                id: props.userID
+            }
+        }
+    }
+})(PostItem);

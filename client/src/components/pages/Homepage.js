@@ -59,12 +59,17 @@ class Homepage extends Component {
         super(props);
         this.state = {
             loggedin: false,
+            userID: "",
         }
     }
 
-    PageChange = () => {
+    PageChange = (userID) => {
         this.setState ({
             loggedin: !this.state.loggedin,
+        })
+
+        this.setState({
+            userID: userID
         })
     }
 
@@ -80,13 +85,13 @@ class Homepage extends Component {
                                 <LoggedIn />
                             </Head2Wrapper>
                             <AddPostWrapper>
-                                <AddPost />
+                                <AddPost userID={this.state.userID}/>
                             </AddPostWrapper>
                             <DividerWrapper>
                                 <Divider />
                             </DividerWrapper>
                             <PostItemWrapper >
-                                <PostItem/>
+                                <PostItem userID={this.state.userID}/>
                             </PostItemWrapper>
                         </HomepageWrapper> :
                         <Loginpage pagechange={this.PageChange}/>
