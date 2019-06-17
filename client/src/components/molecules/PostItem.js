@@ -25,7 +25,6 @@ class PostItem extends Component {
                 <div>Loading Posts...</div>
             )
         } else {
-            console.log("!@posts", data.user)
             return data.user.posts.map((post,index) => {
                 return (
                         <PostItemWrapper key={index}>
