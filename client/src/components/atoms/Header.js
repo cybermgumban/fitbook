@@ -5,8 +5,11 @@ import styled from 'styled-components';
 // import Login from './Login';
 
 const HeaderWrapper = styled.div`
+    display: inline-block;
+    width: 100%;
     height: 80px;
     background-color: rgb(0, 153, 51);
+    justify-align: center;
 `
 
 const InsideHeadWrapper = styled.h1`

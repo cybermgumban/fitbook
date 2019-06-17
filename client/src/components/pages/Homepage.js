@@ -25,7 +25,6 @@ const HomepageWrapper = styled.div`
                          "addPost addPost addPost addPost"
                          "Divider Divider Divider Divider"
                          "Post    Post    Post    Post";
-    background-color: rgb(0, 153, 51);
     height: 80px;
 `
 
@@ -36,7 +35,6 @@ const HeadWrapper = styled.div`
 
 const Head2Wrapper = styled.div`
     grid-area: Head2;
-    justify-self: end;
     align-self: center;
 `
 
@@ -60,15 +58,15 @@ class Homepage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inside: false,
+            inside: true,
         }
     }
 
     render() {
         return (
             <ApolloProvider client={client}>
-                    {this.state.inside?        
-                        (<HomepageWrapper>
+                    {this.state.inside?
+                        <HomepageWrapper>
                             <HeadWrapper>
                                 <Header />
                             </HeadWrapper>
@@ -84,7 +82,7 @@ class Homepage extends Component {
                             <PostItemWrapper >
                                 <PostItem/>
                             </PostItemWrapper>
-                        </HomepageWrapper>) :
+                        </HomepageWrapper> :
                         <Loginpage />
                     }
             </ApolloProvider>
