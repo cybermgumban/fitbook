@@ -37,7 +37,6 @@ class Login extends Component{
         login: true,
     }
 
-
     onClickButton(e) {
         e.preventDefault();
         this.setState({
@@ -75,8 +74,8 @@ class Login extends Component{
                         </div>
                     </form>
                     <div>
-                    <ButtonWrapper>{this.state.login? "Login Account" : "Create Account"}</ButtonWrapper>
-                    <ButtonWrapper onClick={(e) => this.onClickButton(e)}>{this.state.login? "create a new account?" : "login to an existing account?"}</ButtonWrapper>
+                        <ButtonWrapper>{this.state.login? "Login Account" : "Create Account"}</ButtonWrapper>
+                        <ButtonWrapper onClick={(e) => this.onClickButton(e)}>{this.state.login? "create a new account?" : "login to an existing account?"}</ButtonWrapper>
                     </div>
                 </LoginWrapper>
             </div>

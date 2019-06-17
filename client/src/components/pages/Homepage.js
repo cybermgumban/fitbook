@@ -58,14 +58,20 @@ class Homepage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inside: true,
+            loggedin: true,
         }
+    }
+
+    PageChange = () => {
+        this.setState ({
+            loggedin: !this.state.loggedin,
+        })
     }
 
     render() {
         return (
             <ApolloProvider client={client}>
-                    {this.state.inside?
+                    {this.state.loggedin?
                         <HomepageWrapper>
                             <HeadWrapper>
                                 <Header />
@@ -83,7 +89,7 @@ class Homepage extends Component {
                                 <PostItem/>
                             </PostItemWrapper>
                         </HomepageWrapper> :
-                        <Loginpage />
+                        <Loginpage pagechange={this.PageChange}/>
                     }
             </ApolloProvider>
         )
