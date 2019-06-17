@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Component} from 'react';
+import {graphql, compose} from 'react-apollo';
+import { getUsersQuery, addUserMutation } from '../../queries/queries';
 
 import Header from '../atoms/Header'
 
@@ -35,46 +37,108 @@ const FormWrapper = styled.div`
 class Login extends Component{
     state = {
         login: true,
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        error: false,
+        errorMessage: "",
     }
 
     onClickButton(e) {
         e.preventDefault();
         this.setState({
             login: !this.state.login,
+
         })
     }
 
+    submitCreateAccountForm = (e) => {
+        const today = new Date();
+        e.preventDefault();
+
+        if(!this.state.login && this.state.firstName && this.state.lastName && this.state.email && this.state.password) {
+            if (this.props.getUsersQuery.users.find((users) => users.email === this.state.email)) {
+                this.setState ({
+                    error: true,
+                    errorMessage: "User already exists!"
+                })
+            } else { 
+                this.props.addUserMutation({
+                    variables: {
+                        email: this.state.email,
+                        password: this.state.password,
+                        dateRegistered: today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear(),
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                    }
+            })
+                this.setState ({
+                    login: true,
+                })
+            }
+        } 
+        
+        if(this.state.login && this.state.email && this.state.password) {
+            if (this.props.getUsersQuery.users.find((users) => users.email === this.state.email)) {
+                
+
+
+            } else {
+                console.log("nagerror")
+                this.setState ({
+                    error: true,
+                    errorMessage: "Incorrect Username or Password..."
+                })
+            }
+        }
+    }
+
     render() {
+
         return (
             <div>
                 <Header />
                 <LoginWrapper>
                     <InsideHeadWrapper>{this.state.login? "Login" : "Register"}</InsideHeadWrapper>
                     <form>
+                        {this.state.login? (this.state.error? <span style={{color:"red"}}>{this.state.errorMessage}</span> : null) : null}
                         {!this.state.login? 
                         (<div>
                             <FormWrapper>
                                 <label>First Name <br/></label>
-                                <InputWrapper type="field"/>
+                                <InputWrapper 
+                                    value={this.state.firstName}
+                                    onChange={(e)=> this.setState ({ firstName: e.target.value })}
+                                    type="field"/>
                             </FormWrapper>
                             <FormWrapper>
                                 <label>Last Name <br/></label>
-                                <InputWrapper type="field" />
+                                <InputWrapper 
+                                    value={this.state.lastName}
+                                    onChange={(e)=> this.setState ({ lastName: e.target.value })}
+                                    type="field" />
                             </FormWrapper>
                         </div>) : null }
                         <div>
                             <FormWrapper>
                                 <label>Email <br/></label>
-                                <InputWrapper type="field" />
+                                <InputWrapper 
+                                    value={this.state.email}
+                                    onChange={(e)=> this.setState ({ email: e.target.value })}
+                                    type="field" />
                             </FormWrapper>
                             <FormWrapper>
                                 <label>Password <br/></label>
-                                <InputWrapper type="field" />
+                                <InputWrapper 
+                                    value={this.state.password}
+                                    onChange={(e)=> this.setState ({ password: e.target.value })}
+                                    type="field" />
                             </FormWrapper>
                         </div>
                     </form>
                     <div>
-                        <ButtonWrapper>{this.state.login? "Login Account" : "Create Account"}</ButtonWrapper>
+                        <ButtonWrapper onClick={this.submitCreateAccountForm}>{this.state.login? "Login Account" : "Create Account"}</ButtonWrapper>
                         <ButtonWrapper onClick={(e) => this.onClickButton(e)}>{this.state.login? "create a new account?" : "login to an existing account?"}</ButtonWrapper>
                     </div>
                 </LoginWrapper>
@@ -83,4 +147,7 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default compose(
+    graphql(getUsersQuery, {name: "getUsersQuery"}),
+    graphql(addUserMutation, {name: "addUserMutation"})
+)(Login);

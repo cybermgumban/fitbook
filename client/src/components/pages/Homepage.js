@@ -58,7 +58,7 @@ class Homepage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedin: true,
+            loggedin: false,
         }
     }
 

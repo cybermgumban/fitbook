@@ -78,10 +78,6 @@ const UserType = new GraphQLObjectType ({
         dateRegistered: {type: GraphQLString},
         firstName: {type: GraphQLString},
         lastName: {type:GraphQLString},
-        gender: {type:GraphQLString},
-        dateOfBirth: {type:GraphQLString},
-        occupation: {type:GraphQLString},
-        about: {type:GraphQLString},
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args) {
@@ -140,10 +136,6 @@ const Mutation = new GraphQLObjectType({
                 dateRegistered: {type: new GraphQLNonNull(GraphQLString)},
                 firstName: {type: new GraphQLNonNull(GraphQLString)},
                 lastName: {type: new GraphQLNonNull(GraphQLString)},
-                gender: {type: new GraphQLNonNull(GraphQLString)},
-                dateOfBirth: {type: new GraphQLNonNull(GraphQLString)},
-                occupation: {type: new GraphQLNonNull(GraphQLString)},
-                about: {type: new GraphQLNonNull(GraphQLString)},
             },
             resolve(parent, args) {
                 let user = new User({
@@ -152,10 +144,6 @@ const Mutation = new GraphQLObjectType({
                     dateRegistered: args.dateRegistered,
                     firstName: args.firstName,
                     lastName: args.lastName,
-                    gender: args.gender,
-                    dateOfBirth: args.dateOfBirth,
-                    occupation: args.occupation,
-                    about: args.about,
                 });
                 return user.save();
             }

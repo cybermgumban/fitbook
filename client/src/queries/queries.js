@@ -34,17 +34,13 @@ const getPostsQuery = gql`
 `
 
 const addUserMutation = gql`
-    mutation($email: String!, $password: String!, $dateRegistered: String!, $firstName: String!, $lastName: String!, $gender: String!, $dateOfBirth: String!, $occupation: String!, $about: String!) {
-        addUser(email: $email, password: $password, dateRegistered: $dateRegistered, firstName: $firstName, lastName: $lastName, gender: $gender, dateOfBirth: $dateOfBirth, occupation: $occupation, about: $about){
+    mutation($email: String!, $password: String!, $dateRegistered: String!, $firstName: String!, $lastName: String!) {
+        addUser(email: $email, password: $password, dateRegistered: $dateRegistered, firstName: $firstName, lastName: $lastName){
             email
             password
             dateRegistered
             firstName
             lastName
-            gender
-            dateOfBirth
-            occupation
-            about
         }
     }
 `
@@ -87,10 +83,6 @@ const getPostQuery = gql`
             dateRegistered
             firstName
             lastName
-            gender
-            dateOfBirth
-            occupation
-            about
             posts {
                 id
                 userID
