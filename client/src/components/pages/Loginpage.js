@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Component} from 'react';
 import {graphql, compose} from 'react-apollo';
 import { getUsersQuery, addUserMutation } from '../../queries/queries';
+// import jwt from 'jsonwebtoken';
 
 import Header from '../atoms/Header'
 
@@ -66,11 +67,11 @@ class Login extends Component{
             } else { 
                 this.props.addUserMutation({
                     variables: {
-                        email: this.state.email,
-                        password: this.state.password,
+                        email: this.state.email.trim(),
+                        password: this.state.password.trim(),
                         dateRegistered: today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear(),
-                        firstName: this.state.firstName,
-                        lastName: this.state.lastName,
+                        firstName: this.state.firstName.trim(),
+                        lastName: this.state.lastName.trim(),
                     }
             })
                 this.setState ({
@@ -81,11 +82,8 @@ class Login extends Component{
         
         if(this.state.login && this.state.email && this.state.password) {
             if (this.props.getUsersQuery.users.find((users) => users.email === this.state.email)) {
-                
-
-
+                // const token = jwt.sign({email: this.state.email, password: this.state.password}, "mysecret", {expiresIn: "1h"})
             } else {
-                console.log("nagerror")
                 this.setState ({
                     error: true,
                     errorMessage: "Incorrect Username or Password..."

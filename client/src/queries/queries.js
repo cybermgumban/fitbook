@@ -3,6 +3,7 @@ import {gql} from 'apollo-boost';
 const getUsersQuery = gql`
     {
         users {
+            id
             email
         }
     }
@@ -29,6 +30,16 @@ const getPostsQuery = gql`
                     lastName
                 }
             }
+        }
+    }
+`
+
+const addAuthUserMutation = gql`
+    mutation($userID: ID!, $token: String!, $tokenExpiration: Int!) {
+        addUser(userID: $userID, token: $token, tokenExpiration: $tokenExpiration){
+            userID
+            token
+            tokenExpiration
         }
     }
 `
@@ -107,6 +118,7 @@ const getPostQuery = gql`
 
 export { getUsersQuery, 
          getPostsQuery, 
+         addAuthUserMutation,
          addUserMutation, 
          addPostMutation, 
          addPostCommentMutation, 

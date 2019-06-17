@@ -14,6 +14,7 @@ const Post = require('../Models/Post');
 const PostComment = require('../Models/PostComment');
 const PostStat = require('../Models/PostStat');
 const User = require('../Models/User');
+const AuthUser = require('../Models/AuthUser');
 
 const PostCommentType = new GraphQLObjectType ({
     name: 'PostComment',
@@ -84,6 +85,15 @@ const UserType = new GraphQLObjectType ({
             return Post.find({userID: parent.id});
             }
         }
+    })
+});
+
+const AuthUserType = new GraphQLObjectType ({
+    name: 'AuthUser',
+    fields: () => ({
+        userID: {type: GraphQLID},
+        token: {type: GraphQLString},
+        tokenExpiration: {type: GraphQLInt},
     })
 });
 
@@ -194,6 +204,22 @@ const Mutation = new GraphQLObjectType({
                     likeCount: args.likeCount,
                 });
                 return poststat.save();
+            }
+        },
+        addAuthUser: {
+            type: AuthUserType,
+            args: {
+                userID: {type: new GraphQLNonNull(GraphQLID)},
+                token: {type: new GraphQLNonNull(GraphQLString)},
+                tokenExpiration: {type: new GraphQLNonNull(GraphQLInt)},
+            },
+            resolve(parent, args) {
+                let authuser = new AuthUser({
+                    userID: args.userID,
+                    token: args.token,
+                    tokenExpiration: args.tokenExpiration,
+                });
+                return authuser.save();
             }
         },
     }
