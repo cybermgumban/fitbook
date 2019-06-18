@@ -12,10 +12,15 @@ import Divider from '../atoms/Divider';
 import PostItem from  '../molecules/PostItem';
 import Loginpage from '../pages/Loginpage'
 
-//apollo client setup
+//apollo client setup local
+// const client = new ApolloClient({
+//     uri: 'http://localhost:4000/graphql'
+//   })
+
+//apollo client setup heroku
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql'
-  })
+uri: 'http://localhost:4000/graphql'
+})
 
 const HomepageWrapper = styled.div`
     display: grid;

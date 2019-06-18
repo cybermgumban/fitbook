@@ -9,8 +9,11 @@ const app = express();
 //allow coss-origin requests
 app.use(cors());
 
-//connect to mLab database
-mongoose.connect('mongodb+srv://marlon:12345@cluster0-xtcjj.mongodb.net/test?retryWrites=true&w=majority')
+//connect to mongoDB database
+// mongoose.connect('mongodb+srv://marlon:12345@cluster0-xtcjj.mongodb.net/test?retryWrites=true&w=majority')
+
+//connect to mLab Atlas database
+mongoose.connect('mongodb://marlon:1stContact@ds139427.mlab.com:39427/heroku_r76h2nzb')
 mongoose.connection.once('open', () => {
     console.log('connected to database');
 });
