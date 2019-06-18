@@ -19,7 +19,7 @@ import Loginpage from '../pages/Loginpage'
 
 //apollo client setup heroku
 const client = new ApolloClient({
-uri: 'http://localhost:4000/graphql'
+uri: 'https://fitbook-graphql-heroku.herokuapp.com/graphql'
 })
 
 const HomepageWrapper = styled.div`
