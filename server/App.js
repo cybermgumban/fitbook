@@ -10,14 +10,17 @@ const app = express();
 app.use(cors());
 
 //connect to mongoDB database
-// mongoose.connect('mongodb+srv://marlon:12345@cluster0-xtcjj.mongodb.net/test?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://marlon:12345@cluster0-xtcjj.mongodb.net/test?retryWrites=true&w=majority')
 
 //connect to mLab Atlas database
-mongoose.connect('mongodb://marlon:1stContact@ds139427.mlab.com:39427/heroku_r76h2nzb')
+// mongoose.connect('mongodb://marlon:1stContact@ds139427.mlab.com:39427/heroku_r76h2nzb')
 mongoose.connection.once('open', () => {
     console.log('connected to database');
 });
 
+// app.get('/', function(req, res){
+//     res.redirect('/graphql');
+//  });
 
 // connect to graphQL server
 app.use('/graphql', graphqlHTTP({
@@ -25,6 +28,8 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
+//listen to port 4000
+// app.listen(process.env.PORT || 4000, () => {
 app.listen(4000, () => {
     console.log('now listening on request on port 4000');
 });

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Component} from 'react';
 import {graphql, compose} from 'react-apollo';
 import { getUsersQuery, addUserMutation } from '../../queries/queries';
+import PasswordMask from 'react-password-mask';
 // import jwt from 'jsonwebtoken';
 
 import Header from '../atoms/Header'
@@ -50,10 +51,13 @@ class Login extends Component{
         e.preventDefault();
         this.setState({
             login: !this.state.login,
-        })
+            error: true,
+            errorMessage: "",
+        }, () => null)
     }
 
     submitCreateAccountForm = (e) => {
+        const regex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         const today = new Date();
         e.preventDefault();
 
@@ -63,7 +67,14 @@ class Login extends Component{
                     error: true,
                     errorMessage: "User already exists!"
                 })
-            } else { 
+            } 
+            else if (regex.test(this.state.email) === false) {
+                this.setState ({
+                    error: true,
+                    errorMessage: "Invalid Email Address!"
+                })
+            }
+            else { 
                 this.props.addUserMutation({
                     variables: {
                         email: this.state.email.trim(),
@@ -99,14 +110,13 @@ class Login extends Component{
     }
 
     render() {
-
         return (
             <div>
                 <Header />
                 <LoginWrapper>
                     <InsideHeadWrapper>{this.state.login? "Login" : "Register"}</InsideHeadWrapper>
                     <form>
-                        {this.state.login? (this.state.error? <span style={{color:"red"}}>{this.state.errorMessage}</span> : null) : null}
+                        {this.state.error? <span style={{color:"red"}}>{this.state.errorMessage}</span> : null}
                         {!this.state.login? 
                         (<div>
                             <FormWrapper>
@@ -134,10 +144,11 @@ class Login extends Component{
                             </FormWrapper>
                             <FormWrapper>
                                 <label>Password <br/></label>
-                                <InputWrapper 
+                                <PasswordMask
+                                    inputStyles={{textAlign:"center"}}
+                                    buttonStyles={{display:"none"}}
                                     value={this.state.password}
-                                    onChange={(e)=> this.setState ({ password: e.target.value })}
-                                    type="field" />
+                                    onChange={(e)=> this.setState ({ password: e.target.value })}/>
                             </FormWrapper>
                         </div>
                     </form>
