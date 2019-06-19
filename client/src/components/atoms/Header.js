@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 //components
 // import Login from './Login';
@@ -19,7 +20,9 @@ const InsideHeadWrapper = styled.h1`
 const Header = (props) =>{
     return (
             <HeaderWrapper>
-                <InsideHeadWrapper>Fitbook</InsideHeadWrapper>
+                <InsideHeadWrapper>
+                    <Link to="/" style={{textDecoration:"none", color:"white"}}>Fitbook</Link>
+                </InsideHeadWrapper>
             </HeaderWrapper>
     )
 }

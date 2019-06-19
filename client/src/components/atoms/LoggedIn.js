@@ -10,15 +10,19 @@ const LoggedInWrapper = styled.div`
 `
 
 const InnerWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-self: center;
-    justify-content: right;
+    display: block;
+    text-align: right;
+    margin-top: 30px;
+    color: white;
 `
 
-const LabelWrapper = styled.p`
+const ButtonWrapper = styled.button`
+    all: unset;
     margin-right: 40px;
     color: white;
+    :hover {
+        cursor: pointer;
+    }
 `
 
 class LoggedIn extends Component{
@@ -26,7 +30,7 @@ class LoggedIn extends Component{
         return (
             <LoggedInWrapper>
                 <InnerWrapper>
-                    <LabelWrapper>Logout</LabelWrapper>
+                        <ButtonWrapper onClick={() => window.location.reload()}>Logout</ButtonWrapper>
                 </InnerWrapper>
             </LoggedInWrapper>
         )

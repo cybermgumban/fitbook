@@ -82,24 +82,24 @@ class Homepage extends Component {
         return (
             <ApolloProvider client={client}>
                     {this.state.loggedin?
-                        <HomepageWrapper>
-                            <HeadWrapper>
-                                <Header />
-                            </HeadWrapper>
-                            <Head2Wrapper>
-                                <LoggedIn />
-                            </Head2Wrapper>
-                            <AddPostWrapper>
-                                <AddPost userID={this.state.userID}/>
-                            </AddPostWrapper>
-                            <DividerWrapper>
-                                <Divider />
-                            </DividerWrapper>
-                            <PostItemWrapper >
-                                <PostItem userID={this.state.userID}/>
-                            </PostItemWrapper>
-                        </HomepageWrapper> :
-                        <Login pagechange={this.PageChange}/>
+                            <HomepageWrapper>
+                                <HeadWrapper>
+                                    <Header />
+                                </HeadWrapper>
+                                <Head2Wrapper>
+                                    <LoggedIn />
+                                </Head2Wrapper>
+                                <AddPostWrapper>
+                                    <AddPost userID={this.state.userID}/>
+                                </AddPostWrapper>
+                                <DividerWrapper>
+                                    <Divider />
+                                </DividerWrapper>
+                                <PostItemWrapper >
+                                    <PostItem userID={this.state.userID}/>
+                                </PostItemWrapper>
+                            </HomepageWrapper> :
+                            <Login pagechange={this.PageChange}/>
                     }
             </ApolloProvider>
         )
