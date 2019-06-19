@@ -10,7 +10,7 @@ import LoggedIn from '../atoms/LoggedIn';
 import AddPost from '../atoms/AddPost';
 import Divider from '../atoms/Divider';
 import PostItem from  '../molecules/PostItem';
-import Loginpage from '../pages/Loginpage'
+import Login from '../molecules/Login';
 
 //apollo client setup local
 // const client = new ApolloClient({
@@ -99,7 +99,7 @@ class Homepage extends Component {
                                 <PostItem userID={this.state.userID}/>
                             </PostItemWrapper>
                         </HomepageWrapper> :
-                        <Loginpage pagechange={this.PageChange}/>
+                        <Login pagechange={this.PageChange}/>
                     }
             </ApolloProvider>
         )
