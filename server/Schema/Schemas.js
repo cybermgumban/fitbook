@@ -15,6 +15,16 @@ const PostComment = require('../Models/PostComment');
 const PostStat = require('../Models/PostStat');
 const User = require('../Models/User');
 const AuthUser = require('../Models/AuthUser');
+const FriendList = require('../Models/FriendList');
+
+const FriendListType = new GraphQLObjectType ({
+    name: 'FriendList',
+    fields: () => ({
+        id: {type: GraphQLID},
+        userID: {type: GraphQLID},
+        friendID: {type: GraphQLList},
+    })
+});
 
 const PostCommentType = new GraphQLObjectType ({
     name: 'PostComment',
@@ -132,6 +142,13 @@ const RootQuery = new GraphQLObjectType ({
             return PostStat.findById(args.id);
             }
         },
+        friendlist: {
+            type: FriendListType,
+            args: {userID: {type: GraphQLID}},
+            resolve(parent, args) {
+            return FriendList.findById(args.id);
+            }
+        }
     }
 });
 
@@ -220,6 +237,20 @@ const Mutation = new GraphQLObjectType({
                     tokenExpiration: args.tokenExpiration,
                 });
                 return authuser.save();
+            }
+        },
+        addFriend: {
+            type: FriendListType,
+            args: {
+                userID: {type: new GraphQLNonNull(GraphQLID)},
+                friendList: {type: GraphQLList},
+            },
+            resolve(parent, args) {
+                let friendlist = new FriendList({
+                    userID: args.userID,
+                    friendList: args.friendList,
+                });
+                return friendlist.save();
             }
         },
     }

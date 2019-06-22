@@ -87,6 +87,15 @@ const addPostStatMutation = gql`
     }
 `
 
+const addFriendMutation = gql`
+    mutation($userID: String!, $friendList: Array!) {
+        addFriendList(userID: $userID, friendList: $friendList){
+            userID
+            friendList
+        }
+    }
+`
+
 const getPostQuery = gql`
     query($id: ID){
         user(id: $id){
@@ -127,5 +136,6 @@ export { getUsersQuery,
          addUserMutation, 
          addPostMutation, 
          addPostCommentMutation, 
-         addPostStatMutation, 
+         addPostStatMutation,
+         addFriendMutation, 
          getPostQuery };
