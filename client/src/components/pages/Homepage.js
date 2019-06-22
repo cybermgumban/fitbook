@@ -14,14 +14,14 @@ import PostItem from  '../molecules/PostItem';
 import Login from '../molecules/Login';
 
 //apollo client setup local
-const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql'
-  })
+// const client = new ApolloClient({
+//     uri: 'http://localhost:4000/graphql'
+//   })
 
 //apollo client setup heroku
-// const client = new ApolloClient({
-// uri: 'https://fitbook-graphql-heroku.herokuapp.com/graphql'
-// })
+const client = new ApolloClient({
+uri: 'https://fitbook-graphql-heroku.herokuapp.com/graphql'
+})
 
 const HomepageWrapper = styled.div`
     display: grid;
