@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const friendListSchema = new Schema({
     userID: String,
-    friendsID: Array,
+    friendsID: String,
 })
 
 module.exports = mongoose.model("FriendList", friendListSchema);

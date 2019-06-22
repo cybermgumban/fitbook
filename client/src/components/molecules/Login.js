@@ -97,13 +97,18 @@ class Login extends Component{
             if (this.props.getUsersQuery.users.find((users) => users.email === this.state.email)) {
                 const user = this.props.getUsersQuery.users.find((users) => users.email === this.state.email)
                 if( user.password === this.state.password) {
-                    this.props.pagechange(user.id);
+                    this.props.pagechange(user.id, user.friendlists);
+                } else {
+                    this.setState ({
+                        error: true,
+                        errorMessage: "Incorrect Password..."
+                    })
                 }
                 // const token = jwt.sign({email: this.state.email, password: this.state.password}, "mysecret", {expiresIn: "1h"})
             } else {
                 this.setState ({
                     error: true,
-                    errorMessage: "Incorrect Username or Password..."
+                    errorMessage: "Incorrect Username..."
                 })
             }
         }

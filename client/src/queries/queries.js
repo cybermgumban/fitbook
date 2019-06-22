@@ -6,6 +6,11 @@ const getUsersQuery = gql`
             id
             email
             password
+            firstName
+            lastName
+            friendlists {
+                friendsID
+            }
         }
     }
 `
@@ -30,6 +35,11 @@ const getPostsQuery = gql`
                     firstName
                     lastName
                 }
+            }
+            poststat {
+                id
+                postID
+                likeCount
             }
         }
     }
@@ -79,7 +89,7 @@ const addPostCommentMutation = gql`
 `
 
 const addPostStatMutation = gql`
-    mutation($postID: String!, $likeCount: Number!) {
+    mutation($postID: ID!, $likeCount: Number!) {
         addPostStat(postID: $postID, likeCount: $likeCount){
             postID
             likeCount
@@ -88,10 +98,10 @@ const addPostStatMutation = gql`
 `
 
 const addFriendMutation = gql`
-    mutation($userID: String!, $friendList: Array!) {
-        addFriendList(userID: $userID, friendList: $friendList){
+    mutation($userID: ID!, $friendsID: ID!) {
+        addFriend(userID: $userID, friendsID: $friendsID){
             userID
-            friendList
+            friendsID
         }
     }
 `

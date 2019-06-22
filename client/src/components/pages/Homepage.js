@@ -7,6 +7,7 @@ import {ApolloProvider} from 'react-apollo';
 //components
 import Header from '../atoms/Header';
 import LoggedIn from '../atoms/LoggedIn';
+import AddFriend from '../atoms/AddFriend';
 import AddPost from '../atoms/AddPost';
 import Divider from '../atoms/Divider';
 import PostItem from  '../molecules/PostItem';
@@ -29,7 +30,7 @@ const HomepageWrapper = styled.div`
     grid-template-areas: "Head    Head    Head2    Head2"
                          "addPost addPost addPost addPost"
                          "Divider Divider Divider Divider"
-                         "Post    Post    Post    Post";
+                         "Post    Post    Post    Friend";
     height: 80px;
 `
 
@@ -42,6 +43,14 @@ const Head2Wrapper = styled.div`
     grid-area: Head2;
     align-self: center;
 `
+
+const AddFriendWrapper = styled.div`
+    margin-left: 10px;
+    grid-area: Friend;
+    align-self: start;
+    justify-self: center;
+`
+
 
 const AddPostWrapper = styled.div`
     grid-area: addPost;
@@ -65,16 +74,15 @@ class Homepage extends Component {
         this.state = {
             loggedin: false,
             userID: "",
+            friendLists: [],
         }
     }
 
-    PageChange = (userID) => {
+    PageChange = (userID, friendLists) => {
         this.setState ({
             loggedin: !this.state.loggedin,
-        })
-
-        this.setState({
-            userID: userID
+            userID: userID,
+            friendLists: friendLists
         })
     }
 
@@ -89,6 +97,9 @@ class Homepage extends Component {
                                 <Head2Wrapper>
                                     <LoggedIn />
                                 </Head2Wrapper>
+                                <AddFriendWrapper>
+                                    <AddFriend userID={this.state.userID} friendLists={this.state.friendLists}/>
+                                </AddFriendWrapper>
                                 <AddPostWrapper>
                                     <AddPost userID={this.state.userID}/>
                                 </AddPostWrapper>
@@ -96,7 +107,7 @@ class Homepage extends Component {
                                     <Divider />
                                 </DividerWrapper>
                                 <PostItemWrapper >
-                                    <PostItem userID={this.state.userID}/>
+                                    <PostItem userID={this.state.userID} friendLists={this.state.friendLists}/>
                                 </PostItemWrapper>
                             </HomepageWrapper> :
                             <Login pagechange={this.PageChange}/>

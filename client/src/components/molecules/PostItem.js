@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
 import {graphql} from 'react-apollo';
-import { getPostQuery } from '../../queries/queries';
+import { getPostsQuery } from '../../queries/queries';
 
 //components
 import PicIcon from '../atoms/PicIcon';
@@ -19,13 +19,20 @@ const PostItemWrapper = styled.div`
 class PostItem extends Component {
     displayPosts() {
         const data = this.props.data;
-        
+
+        if(data.posts !== undefined) {
+                const newdata = data.posts.filter((element) => {
+                    return element.userID === this.props.userID
+                })
+                console.log("!@newdata", newdata)
+        }
+
         if(data.loading) {
             return (
                 <div>Loading Posts...</div>
             )
         } else {
-                return data.user.posts.map((post,index) => {
+                return data.posts.map((post,index) => {
                     return (
                             <PostItemWrapper key={index}>
                                 <div>
@@ -61,12 +68,12 @@ class PostItem extends Component {
     }
 }
 
-export default graphql(getPostQuery, {
-    options: (props) => {
-        return {
-            variables: {
-                id: props.userID
-            }
-        }
-    }
+// export default graphql(getPostQuery, {
+//     options: (props) => {
+//         return {
+//             variables: {
+//                 id: props.userID
+//         }}
+//     }
+export default graphql(getPostsQuery, {
 })(PostItem);

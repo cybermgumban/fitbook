@@ -22,7 +22,7 @@ const FriendListType = new GraphQLObjectType ({
     fields: () => ({
         id: {type: GraphQLID},
         userID: {type: GraphQLID},
-        friendID: {type: GraphQLList},
+        friendsID: {type: GraphQLID},
     })
 });
 
@@ -94,6 +94,12 @@ const UserType = new GraphQLObjectType ({
             resolve(parent, args) {
             return Post.find({userID: parent.id});
             }
+        },
+        friendlists: {
+            type: new GraphQLList(FriendListType),
+            resolve(parent, args) {
+            return FriendList.find({userID: parent.id});
+            }
         }
     })
 });
@@ -142,7 +148,7 @@ const RootQuery = new GraphQLObjectType ({
             return PostStat.findById(args.id);
             }
         },
-        friendlist: {
+        friendlists: {
             type: FriendListType,
             args: {userID: {type: GraphQLID}},
             resolve(parent, args) {
@@ -243,12 +249,12 @@ const Mutation = new GraphQLObjectType({
             type: FriendListType,
             args: {
                 userID: {type: new GraphQLNonNull(GraphQLID)},
-                friendList: {type: GraphQLList},
+                friendsID: {type: new GraphQLNonNull(GraphQLID)},
             },
             resolve(parent, args) {
                 let friendlist = new FriendList({
                     userID: args.userID,
-                    friendList: args.friendList,
+                    friendsID: args.friendsID,
                 });
                 return friendlist.save();
             }
