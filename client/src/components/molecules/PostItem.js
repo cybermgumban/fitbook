@@ -20,19 +20,23 @@ class PostItem extends Component {
     displayPosts() {
         const data = this.props.data;
 
-        // if(data.posts !== undefined) {
-        //         const newdata = data.posts.filter((element) => {
-        //             return element.userID === this.props.userID
-        //         })
-        //         console.log("!@newdata", newdata)
-        // }
+        const IDs = [];
+        IDs.push(this.props.userID);
+        this.props.friendLists.map((friend) => {
+            return IDs.push(friend.friendsID)
+        })
 
         if(data.loading) {
             return (
                 <div>Loading Posts...</div>
             )
         } else {
-                return data.user.posts.map((post,index) => {
+            if (data !== undefined) {
+                const newdata = data.posts.filter((element) => {
+                    return IDs.indexOf(element.userID) > -1
+                })
+
+                return newdata.map((post,index) => {
                     return (
                             <PostItemWrapper key={index}>
                                 <div>
@@ -56,6 +60,7 @@ class PostItem extends Component {
                             </PostItemWrapper>
                     )
                 })
+            }
         }
     }
 
@@ -68,12 +73,12 @@ class PostItem extends Component {
     }
 }
 
-export default graphql(getPostQuery, {
-    options: (props) => {
-        return {
-            variables: {
-                id: props.userID
-        }}
-    }
-// export default graphql(getPostsQuery, {
+// export default graphql(getPostQuery, {
+//     options: (props) => {
+//         return {
+//             variables: {
+//                 id: props.userID
+//         }}
+//     }
+export default graphql(getPostsQuery, {
 })(PostItem);

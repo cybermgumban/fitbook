@@ -92,24 +92,25 @@ class Login extends Component{
                 window.location.reload()
             }
         } 
-        
         if(this.state.login && this.state.email && this.state.password) {
-            if (this.props.getUsersQuery.users.find((users) => users.email === this.state.email)) {
-                const user = this.props.getUsersQuery.users.find((users) => users.email === this.state.email)
-                if( user.password === this.state.password) {
-                    this.props.pagechange(user.id, user.friendlists);
+            if (this.props.getUsersQuery.users !== undefined) {
+                if (this.props.getUsersQuery.users.find((users) => users.email === this.state.email)) {
+                    const user = this.props.getUsersQuery.users.find((users) => users.email === this.state.email)
+                    if( user.password === this.state.password) {
+                        this.props.pagechange(user.id, user.friendlists);
+                    } else {
+                        this.setState ({
+                            error: true,
+                            errorMessage: "Incorrect Password..."
+                        })
+                    }
+                    // const token = jwt.sign({email: this.state.email, password: this.state.password}, "mysecret", {expiresIn: "1h"})
                 } else {
                     this.setState ({
                         error: true,
-                        errorMessage: "Incorrect Password..."
+                        errorMessage: "Incorrect Username..."
                     })
                 }
-                // const token = jwt.sign({email: this.state.email, password: this.state.password}, "mysecret", {expiresIn: "1h"})
-            } else {
-                this.setState ({
-                    error: true,
-                    errorMessage: "Incorrect Username..."
-                })
             }
         }
     }
