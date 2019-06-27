@@ -2,7 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import styled from 'styled-components';
 import {graphql} from 'react-apollo';
-import { getPostsQuery, getPostQuery } from '../../queries/queries';
+import { getPostsQuery } from '../../queries/queries';
 
 //components
 import PicIcon from '../atoms/PicIcon';
